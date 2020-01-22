@@ -1,0 +1,47 @@
+html {
+  overflow: hidden; }
+
+body {
+  margin: 0;
+  font-size: 16px;
+  font-family: arial;
+  height: 100vh;
+  perspective: 1px;
+  transform-style: preserve-3d;
+  overflow-x: hidden;
+  overflow-y: auto; 
+}
+
+#logo {
+    /*border-right: 1px solid #F2F1EB;*/
+    display: table-cell;
+    float: none;
+    margin: 0;
+    padding: 0 10px 0 0;
+    vertical-align: bottom;
+    z-index: 3;
+}
+.buttons {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    text-align: center;
+    border: solid 1px 
+    #e5e5e5;
+    margin: 0 auto 15px;
+    display: block;
+    -webkit-transition: all 0.2s ease-in-out 0s;
+    -moz-transition: all 0.2s ease-in-out 0s;
+    -o-transition: all 0.2s ease-in-out 0s;
+    transition: all 0.2s ease-in-out 0s;
+}
+.mega-octicon {
+    font: normal normal 48px octicons;
+        line-height: normal;
+    display: inline-block;
+    text-decoration: none;
+    -webkit-font-smoothing: antialiased;
+    color: 
+    #4183c4;
+    line-height: 100px;
+}

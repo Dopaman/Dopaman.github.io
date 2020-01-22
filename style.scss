@@ -1,0 +1,19 @@
+html {
+	overflow:hidden;
+}
+.navbar {
+
+}
+.navbar span {
+
+}
+body {
+	margin: 0;
+	font-size: 16px;
+	font-family: arial;
+	height: 100vh;
+	perspective: 1px;
+	transform-style: preserve-3d;
+	overflow-x: hidden;
+	overflow-y:auto;
+}
