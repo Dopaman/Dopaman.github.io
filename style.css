@@ -22,6 +22,9 @@ ul {
   display: table-cell;
   text-align: center;
 }
+.headerBG {
+  background-color: #243a42;
+}
 .headerBG #logo {
     /*border-right: 1px solid #F2F1EB;*/
     display: table-cell;
@@ -42,7 +45,6 @@ ul {
     height: 50px;
     border-radius: 25px;
     text-align: center;
-    border: solid 1px #e5e5e5;
     margin: 0 auto 0 auto;
     display: block;
     -webkit-transition: all 0.2s ease-in-out 0s;
@@ -62,7 +64,7 @@ ul {
     display: inline-block;
     text-decoration: none;
     -webkit-font-smoothing: antialiased;
-    color: #4183c4;
+    color: #e5e5e5;
     line-height: 30px;
 }
 .navbar {
@@ -87,5 +89,20 @@ ul {
   margin-right: 0 !important;
 }
 .bg-custom {
-  background-color: #ccc;
+  background-color: #417744;
+}
+.popular_image {
+  transition: transform .2s;
+  margin: 0 auto 0 auto;
+}
+.popular_image:hover {
+  -webkit-transform:scale(1.1);
+ -moz-transform:scale(1.1);
+ -o-transform:scale(1.1);
+ -ms-transform:scale(1.1);
+ transform:scale(1.1)
+}
+img {
+  max-width: 100%;
+  min-height: 100%;
 }
