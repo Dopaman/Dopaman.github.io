@@ -105,8 +105,3 @@ ul {
 .popular_image_item {
   max-width: 100%;
 }
-#popular_row{
-  padding-left: 0 !important;
-  margin-left: -22px !important;
-  margin-right: -22px !important;
-}
