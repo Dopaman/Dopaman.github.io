@@ -102,6 +102,11 @@ ul {
  -ms-transform:scale(1.1);
  transform:scale(1.1)
 }
-img .popular_image_item {
+.popular_image_item {
   max-width: 100%;
+}
+#popular_row{
+  padding-left: 0 !important;
+  margin-left: -22px !important;
+  margin-right: -22px !important;
 }
