@@ -1,0 +1,28 @@
+{
+  "name": "alawoa",
+  "version": "1.0.0",
+  "description": "drawing canvas",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dopaman/Dopaman.github.io.git"
+  },
+  "keywords": [
+    "node",
+    "sketch.js",
+    "canvas"
+  ],
+  "author": "Niklas Schmidt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dopaman/Dopaman.github.io/issues"
+  },
+  "homepage": "https://github.com/Dopaman/Dopaman.github.io#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
