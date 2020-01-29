@@ -11,6 +11,7 @@ body{
   transform-style: preserve-3d;
   overflow-x: hidden;
   overflow-y: auto; 
+  background-color: #eaeaea !important;
 }
 ul {
   list-style: none;
@@ -23,7 +24,7 @@ ul {
   text-align: center;
 }
 .headerBG {
-  background-color: #243a42;
+  background-color: #2e4057;
 }
 .headerBG #logo {
     /*border-right: 1px solid #F2F1EB;*/
@@ -89,7 +90,7 @@ ul {
   margin-right: 0 !important;
 }
 .bg-custom {
-  background-color: #417744;
+  background-color: #99c24d;
 }
 .popular_image {
   transition: transform .2s;
@@ -112,11 +113,15 @@ ul {
 }
 
 canvas {
-  width: 100%;
-  height: 100vh;
+  width: 400px;
+  height: 200px;
   background: #fff;
   padding: 0;
   margin: 0 auto;
   margin-bottom: 1rem;
   display: block;
+}
+#drawCanvas {
+  position: relative;
+  border: 1px solid #000;
 }
