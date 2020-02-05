@@ -3,6 +3,33 @@ var images = document.getElementsByClassName("popular_image_item");
 var imgCanvas = document.getElementById("imgCanvas");
 var cv_context = imgCanvas.getContext("2d");
 
+// Get a reference to the database service
+var database = firebase.firestore();
+
+
+function writeUserData(imageUrl) {
+	firebase.firestore().collection('paintings').doc('images').set({
+		canvas_picture: imageUrl
+	}).catch(function(error) {
+		console.error("Error writing document: ", error);
+	});
+}
+
+
+function drawToCanvas(imageUrl) {
+	var canvas = document.getElementById("drawCanvas");
+	var context = canvas.getContext("2d");
+	var image = new Image();
+	image.width = canvas.offsetWidth;
+	image.heigth = canvas.offsetHeight;
+
+	image.onload = function () {
+		context.drawImage(this, 0, 0);
+	}
+	this.src = imageUrl;
+}
+
+
 for (var i=0; i < images.length; i++) {
 	images[i].addEventListener("click", function() {
 		var width = this.width;
@@ -18,7 +45,10 @@ for (var i=0; i < images.length; i++) {
 // Keep everything in anonymous function, called on window load.
 if(window.addEventListener) {
 	window.addEventListener('load', function () {
-		var canvas, context, tool, socket;
+		var canvas, context, tool, socket, saveImage, imageUrl;
+
+		var image = new Image();
+		saveImage = new Image();
 		
 		socket = io.connect('http://localhost:3000');
 		
@@ -32,14 +62,73 @@ if(window.addEventListener) {
     // Find the canvas element.
     canvas = document.getElementById('drawCanvas');
 
+
+    var save_button = document.getElementById("save_button");
+    var load_button = document.getElementById("load_button");
+    var clear_button = document.getElementById("clear_button");
+
+    clear_button.addEventListener("click", function() {
+    	context.clearRect(0,0, canvas.offsetWidth, canvas.offsetHeight);
+    });
+
+    //Loads an Image from Database on button click.
+    load_button.addEventListener("click", function() {
+    	var docRef = database.collection("paintings").doc("images");
+
+    	var getOptions = {
+    		source: 'cache'
+    	};
+    	docRef.get().then(function(doc) {
+    		if (doc.exists) {
+    			imageUrl = doc.data();
+    			drawToCanvas(imageUrl);
+    			console.log("Document data:", imageUrl);
+
+
+    		} else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch(function(error) {
+	console.log("Error getting document:", error);
+});
+}, false);
+
+
+
+    save_button.addEventListener("click", function() {
+    	var imageUrl = canvas.toDataURL();
+    	saveImage.src = canvas.toDataURL();
+    	writeUserData(imageUrl);
+    });
+
     var container = document.getElementsByClassName("container")[2];
     var width = 1140;
     var height = images[0].height * 2;
+    var oldWidth = container.offsetWidth;
+    var oldHeight;
     console.log(width, height);
     canvas.setAttribute("width", width);
     canvas.setAttribute("height", height);
 
     getCaddEL(canvas);
+
+    var initialOffset = width/container.offsetWidth;
+    context.setTransform(initialOffset, 
+    	0, 0, initialOffset, 0, 0);
+    
+    var offset;
+    window.addEventListener("resize", resizeContext, false);
+    function resizeContext() {
+    	
+    	if (oldWidth != canvas.offsetWidth) {
+    		offset = width / container.offsetWidth;
+    		console.log(canvas.offsetWidth, oldWidth);
+    		context.setTransform( offset,
+    			0, 0, offset, 0, 0);
+    		oldWidth = canvas.offsetWidth;
+    	}
+    }
     //window.addEventListener("resize", resizeCanvas, false);
     //Creates an instance of the tool pencil.
     tool = new tool_pencil();
@@ -48,14 +137,14 @@ if(window.addEventListener) {
 }
 function getCaddEL(canvas) {
 	if (!canvas) {
-    	alert('Error: I cannot find the canvas element!');
-    	return;
-    }
+		alert('Error: I cannot find the canvas element!');
+		return;
+	}
 
-    if (!canvas.getContext) {
-    	alert('Error: no canvas.getContext!');
-    	return;
-    }
+	if (!canvas.getContext) {
+		alert('Error: no canvas.getContext!');
+		return;
+	}
 
     // Get the 2D canvas context.
     context = canvas.getContext('2d');
@@ -76,7 +165,7 @@ function removeEL(canvas) {
 	canvas.removeEventListener('mousemove', ev_canvas, false);
 	canvas.removeEventListener('mouseup', ev_canvas, false);
 }
-
+//Deprecated.
 function resizeCanvas() {
 
 	if ((canvas.width < container.offsetWidth) || canvas.width > container.offsetWidth) {
@@ -102,7 +191,7 @@ function resizeCanvas() {
 		canvas = document.getElementById('drawCanvas');
 		getCaddEL(canvas);
 
-}
+	}
 }
 
 socket.on('mouse', newMousemove);
